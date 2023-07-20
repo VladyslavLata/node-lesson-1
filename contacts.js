@@ -7,7 +7,7 @@ const contactsPath = path.join(__dirname, "dl", "contacts.json");
 async function listContacts() {
   // ...твой код. Возвращает массив контактов.
   const contacts = await fs.readFile(contactsPath, "utf-8");
-  console.log(contacts);
+  // console.log(contacts);
   return JSON.parse(contacts);
 }
 
