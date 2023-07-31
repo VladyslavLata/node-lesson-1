@@ -41,11 +41,36 @@ async function addContact({ name, email, phone }) {
   // ...твой код. Возвращает объект добавленного контакта.
 }
 
+
+const updateContact = async (contactId, body) => {
+  const contacts = await listContacts();
+  const contactIndex = contacts.findIndex(
+    (contact) => contact.id === contactId
+  );
+  if (contactIndex === -1) {
+    return null;
+  }
+  const currentContact = contacts[contactIndex];
+  const changedContact = {
+    id:  contactId,
+    name: body.name || currentContact.name,
+    email: body.email || currentContact.email,
+    phone: body.phone || currentContact.phone
+  };
+  contacts.splice(contactIndex, 1, changedContact)
+  await fs.writeFile(
+    contactsPath,
+    JSON.stringify(contacts, null, 2)
+  );
+  return changedContact;
+};
+
 module.exports = {
   listContacts,
   getContactById,
   removeContact,
   addContact,
+  updateContact
 };
 
 // [

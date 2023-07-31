@@ -3,6 +3,7 @@ const {
   getContactById,
   removeContact,
   addContact,
+  updateContact
 } = require("./contacts");
 
 // const findContactById = async (id) => {
@@ -60,6 +61,11 @@ async function invokeAction({ action, id, name, email, phone }) {
     case "remove":
       const removeContactById = await removeContact(id);
       console.log(removeContactById);
+      break;
+    
+     case "update":
+      const updateContactById = await updateContact(id, {name, email, phone});
+      console.log(updateContactById);
       break;
 
     default:
